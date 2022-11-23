@@ -1,12 +1,41 @@
-# operator
-// TODO(user): Add simple overview of use/purpose
+# Demo operator-kafka 
 
-## Description
-// TODO(user): An in-depth paragraph about your project and overview of use
+## Init controller
 
-## Getting Started
-You’ll need a Kubernetes cluster to run against. You can use [KIND](https://sigs.k8s.io/kind) to get a local cluster for testing, or run against a remote cluster.
-**Note:** Your controller will automatically use the current context in your kubeconfig file (i.e. whatever cluster `kubectl cluster-info` shows).
+```
+operator-sdk init --domain example.com --repo github.com/jmlero/operator-kafka --plugins=go/v4-alpha
+```
+
+## Create controller
+
+```
+operator-sdk create api --group cache --version v1alpha1 --kind KafkaTopic --resource --controller
+```
+
+## Create manifests
+
+```
+make manifests
+```
+
+## Install manifests
+
+```
+make install
+```
+
+## Build and push image
+
+```
+make docker-build docker-push IMG="jmlero/kafkatopic:v0.0.1"
+```
+
+## Deploy image
+
+```
+make deploy IMG="jmlero/kafkatopic:v0.0.1"
+```
+
 
 ### Running on the cluster
 1. Install Instances of Custom Resources:
